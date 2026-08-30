@@ -89,7 +89,7 @@ tr:nth-child(even) td{background:var(--surface)}
 .bg{background:var(--green-bg);color:var(--green);font-size:10px;padding:2px 6px;border-radius:8px;font-weight:500;white-space:nowrap}
 .bb{background:var(--blue-bg);color:var(--blue);font-size:10px;padding:2px 6px;border-radius:8px;font-weight:500;white-space:nowrap}
 .ba{background:var(--gold-bg);color:#8A6212;font-size:10px;padding:2px 6px;border-radius:8px;font-weight:500;white-space:nowrap}
-.wn{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:12px 14px;margin:0 0 18px}.wn h4{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}.wn ul{list-style:none;padding:0;margin:0}.wn li{font-size:12.5px;color:var(--text2);line-height:1.55;padding:4px 0;border-top:.5px solid var(--surface2)}.wn li:first-child{border-top:0}.wn-d{display:inline-block;font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-bg);padding:1px 6px;border-radius:6px;margin-right:6px;white-space:nowrap}.wn-t{font-size:10px;color:var(--text3)}
+#sr{display:none;margin-bottom:16px}#home.searching #sr{display:block}#home.searching .wn,#home.searching .section-label,#home.searching .card-grid{display:none}.sr-hd{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin:0 0 8px}a.sr-i{display:block;background:#fff;border:.5px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;text-decoration:none}a.sr-i:hover{border-color:var(--accent)}.sr-c{font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text3);margin-bottom:3px}.sr-t{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4}.sr-s{font-size:12px;color:var(--text2);line-height:1.55}.sr-s mark{background:#FFF1B8;color:var(--text);padding:0 1px;border-radius:2px;font-weight:600}.sr-none{font-size:13px;color:var(--text2);padding:14px;background:#fff;border:.5px solid var(--border);border-radius:10px}.wn a{color:var(--blue);text-decoration:none;font-weight:600}.wn a:hover{text-decoration:underline}.wn{background:#fff;border:.5px solid var(--border);border-radius:10px;padding:12px 14px;margin:0 0 18px}.wn h4{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}.wn ul{list-style:none;padding:0;margin:0}.wn li{font-size:12.5px;color:var(--text2);line-height:1.55;padding:4px 0;border-top:.5px solid var(--surface2)}.wn li:first-child{border-top:0}.wn-d{display:inline-block;font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-bg);padding:1px 6px;border-radius:6px;margin-right:6px;white-space:nowrap}.wn-t{font-size:10px;color:var(--text3)}
 /* NUH BOX */
 .nuh{background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 12px;margin:12px 0;font-size:12px;color:#7A5C00;line-height:1.6}
 .nuh b{font-weight:600}
@@ -1392,10 +1392,11 @@ noscript .nojs-note{display:block}
 <div style="max-width:400px">
   <div class="h3">Height (cm)</div>
   <input type="number" id="must-ht" placeholder="e.g. 165" min="50" step="0.1" style="width:100%;padding:9px 12px;border:.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:12px" oninput="calcMUST()">
-  <div class="h3">Weight (kg)</div>
+  <div class="h3">Current weight (kg)</div>
   <input type="number" id="must-wt" placeholder="e.g. 52" min="10" step="0.1" style="width:100%;padding:9px 12px;border:.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:12px" oninput="calcMUST()">
-  <div class="h3">Unplanned weight loss in the past 3–6 months (%)</div>
-  <input type="number" id="must-wl" placeholder="e.g. 8" min="0" step="0.1" style="width:100%;padding:9px 12px;border:.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:12px" oninput="calcMUST()">
+  <div class="h3">Weight 3–6 months ago (kg)</div>
+  <input type="number" id="must-pw" placeholder="e.g. 58 — leave blank if not known" min="10" step="0.1" style="width:100%;padding:9px 12px;border:.5px solid var(--border);border-radius:8px;font-size:14px;margin-bottom:4px" oninput="calcMUST()">
+  <div id="must-wlnote" style="font-size:11.5px;color:var(--text3);margin-bottom:12px">Unplanned weight loss is calculated from these two weights.</div>
   <div class="h3">Acute disease effect</div>
   <label style="font-size:13px;color:var(--text2);display:block;line-height:1.5"><input type="checkbox" id="must-acute" onchange="calcMUST()" style="margin-right:6px">Acutely ill <b>and</b> there has been, or is likely to be, <b>no nutritional intake for &gt;5 days</b></label>
   <div id="must-result" style="display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:15px;font-weight:600;text-align:center"></div>
@@ -2072,9 +2073,10 @@ noscript .nojs-note{display:block}
   <label style="font-size:13px;color:var(--text2)"><input type="radio" name="cg-sex" value="F" onchange="calcCRCL()" style="margin-right:6px">Female</label>
   <div id="crcl-result" style="display:none;margin-top:16px;padding:14px;border-radius:10px;font-size:15px;font-weight:600;text-align:center"></div>
 </div></section>
-<section class="pg" id="home"><div class="banner"><div class="tag">BETA v4.1</div><h2>G&amp;H Residency Guide</h2><p>NUH Gastroenterology &amp; Hepatology · Quick clinical reference for MOs and residents.</p><p style="margin-top:4px;font-size:12px;opacity:0.85">Compiled by Dr Peter Daniel &amp; Dr Arsha Aggarwal</p></div>
-<div class="search-wrap"><span class="si">🔍</span><input type="text" placeholder="Search topics..." oninput="filterCards(this.value)"/></div>
-<div class="wn"><h4>What’s New</h4><ul><li><span class="wn-d">Aug 2026</span> HBV Reactivation Prophylaxis <span class="wn-t">Hepatology</span></li><li><span class="wn-d">Aug 2026</span> Out of OT Request Form link <span class="wn-t">Arranging Procedures</span></li><li><span class="wn-d">Aug 2026</span> Parenteral Nutrition &middot; MUST Score calculator <span class="wn-t">Gastroenterology</span></li><li><span class="wn-d">Aug 2026</span> Key Contacts &middot; Consent <span class="wn-t">Operational</span></li></ul></div>
+<section class="pg" id="home"><div class="banner"><div class="tag">BETA v4.2</div><h2>G&amp;H Residency Guide</h2><p>NUH Gastroenterology &amp; Hepatology · Quick clinical reference for MOs and residents.</p><p style="margin-top:4px;font-size:12px;opacity:0.85">Compiled by Dr Peter Daniel &amp; Dr Arsha Aggarwal</p></div>
+<div class="search-wrap"><span class="si">🔍</span><input type="text" id="q" placeholder="Search the whole guide…" autocomplete="off" oninput="doSearch(this.value)"/></div>
+<div id="sr"></div>
+<div class="wn"><h4>What’s New</h4><ul><li><span class="wn-d">Aug 2026</span> <a href="#hbvprophy">HBV Reactivation Prophylaxis</a> <span class="wn-t">Hepatology</span></li><li><span class="wn-d">Aug 2026</span> <a href="#sc-ga">Out of OT Request Form link</a> <span class="wn-t">Arranging Procedures</span></li><li><span class="wn-d">Aug 2026</span> <a href="#nutrition">Parenteral Nutrition</a> &middot; <a href="#calc_must">MUST Score calculator</a> <span class="wn-t">Gastroenterology</span></li><li><span class="wn-d">Aug 2026</span> <a href="#contacts">Key Contacts</a> &middot; <a href="#consent">Consent</a> <span class="wn-t">Operational</span></li></ul></div>
 <div class="section-label">⚙️ Operational</div>
 <div class="card-grid" id="op-grid">
 <a class="card" href="#ward"><div class="icon" style="background:#E3F2FD">🏥</div><h3>Ward Essentials</h3><p>Team structure, daily tasks</p></a>
@@ -2338,28 +2340,41 @@ function calcGBS() {
 }
 
 function calcMUST() {
-  const ht = parseFloat(document.getElementById("must-ht").value);
-  const wt = parseFloat(document.getElementById("must-wt").value);
-  const wl = parseFloat(document.getElementById("must-wl").value);
-  const acute = document.getElementById("must-acute").checked;
-  const res = document.getElementById("must-result");
-  if (isNaN(ht) || isNaN(wt) || isNaN(wl)) { res.style.display = "none"; return; }
-  const bmi = wt / Math.pow(ht / 100, 2);
-  const bmiScore = bmi > 20 ? 0 : (bmi >= 18.5 ? 1 : 2);
-  const wlScore = wl < 5 ? 0 : (wl <= 10 ? 1 : 2);
-  const acScore = acute ? 2 : 0;
-  const total = bmiScore + wlScore + acScore;
-  const risk = total === 0 ? "Low risk" : (total === 1 ? "Medium risk" : "High risk");
-  const col = total === 0 ? "#E8F7EF" : (total === 1 ? "#FFF8E8" : "#FDECEA");
-  const tc  = total === 0 ? "#1A7A4A" : (total === 1 ? "#7A5C00" : "#C0392B");
-  const act = total === 0 ? "Routine clinical care. Repeat screening weekly in hospital."
-            : (total === 1 ? "Observe. Document intake for 3 days; follow local policy if inadequate."
-            : "Treat. Refer to the dietitian or nutrition support team.");
+  var ht = parseFloat(document.getElementById("must-ht").value);
+  var wt = parseFloat(document.getElementById("must-wt").value);
+  var pw = parseFloat(document.getElementById("must-pw").value);
+  var acute = document.getElementById("must-acute").checked;
+  var res = document.getElementById("must-result");
+  var note = document.getElementById("must-wlnote");
+  var wl = 0, known = false;
+  if (!isNaN(pw) && pw > 0 && !isNaN(wt) && wt > 0) {
+    wl = (pw - wt) / pw * 100;
+    if (wl < 0) wl = 0;
+    known = true;
+  }
+  if (note) {
+    note.innerHTML = known
+      ? 'Unplanned weight loss = <b>' + wl.toFixed(1) + '%</b>' + (pw <= wt ? ' (no loss \u2014 scored 0)' : '')
+      : 'Unplanned weight loss is calculated from these two weights. If the earlier weight is not known it is scored 0.';
+  }
+  if (isNaN(ht) || isNaN(wt)) { res.style.display = "none"; return; }
+  var bmi = wt / Math.pow(ht / 100, 2);
+  var bmiScore = bmi > 20 ? 0 : (bmi >= 18.5 ? 1 : 2);
+  var wlScore = wl < 5 ? 0 : (wl <= 10 ? 1 : 2);
+  var acScore = acute ? 2 : 0;
+  var total = bmiScore + wlScore + acScore;
+  var risk = total === 0 ? "Low risk" : (total === 1 ? "Medium risk" : "High risk");
+  var col = total === 0 ? "#E8F7EF" : (total === 1 ? "#FFF8E8" : "#FDECEA");
+  var tc  = total === 0 ? "#1A7A4A" : (total === 1 ? "#7A5C00" : "#C0392B");
+  var act = total === 0 ? "Routine clinical care. Repeat screening weekly in hospital."
+          : (total === 1 ? "Observe. Document intake for 3 days; follow local policy if inadequate."
+          : "Treat. Refer to the dietitian or nutrition support team.");
+  var wlTxt = known ? wl.toFixed(1) + '%' : 'not entered';
   res.style.display = "block"; res.style.background = col; res.style.color = tc;
   res.style.border = "1px solid " + tc;
-  res.innerHTML = "MUST <b>" + total + "</b> — <b>" + risk + "</b>"
+  res.innerHTML = "MUST <b>" + total + "</b> \u2014 <b>" + risk + "</b>"
     + '<br><span style="font-weight:400;font-size:12px">BMI ' + bmi.toFixed(1)
-    + ' (score ' + bmiScore + ') \u00B7 weight loss ' + wl + '% (score ' + wlScore
+    + ' (score ' + bmiScore + ') \u00B7 weight loss ' + wlTxt + ' (score ' + wlScore
     + ') \u00B7 acute disease (score ' + acScore + ')<br>' + act + '</span>';
 }
 
@@ -2432,11 +2447,101 @@ function calcR() {
   var w = document.querySelector('.search-wrap');
   if (w) w.style.display = 'block';
 })();
-function filterCards(v){
-  var q = v.toLowerCase();
-  document.querySelectorAll('#home .card').forEach(function(c){
-    c.style.display = c.textContent.toLowerCase().indexOf(q) > -1 ? '' : 'none';
-  });
+/* ---- full-text search across every chapter ---- */
+var SR_IDX = null;
+function srText(el){
+  var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false), out = [], n;
+  while ((n = w.nextNode())) { var t = n.nodeValue.replace(/\s+/g,' ').trim(); if (t) out.push(t); }
+  return out.join(' ');
+}
+function srEsc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function srBuild(){
+  var out = [], secs = document.querySelectorAll('section.pg');
+  for (var i = 0; i < secs.length; i++) {
+    var sec = secs[i];
+    if (sec.id === 'home') continue;
+    var h = sec.querySelector('.page-hdr h2');
+    var g = sec.querySelector('.page-hdr .bc');
+    var chap = h ? h.textContent.trim() : sec.id;
+    var grp  = g ? g.textContent.trim() : '';
+    var cur = { chap: chap, grp: grp, id: sec.id, head: '', text: '' };
+    var kids = sec.children;
+    for (var j = 0; j < kids.length; j++) {
+      var n = kids[j];
+      if (n.tagName === 'NOSCRIPT') continue;
+      var cl = (typeof n.className === 'string') ? n.className : '';
+      if (cl.indexOf('page-hdr') > -1 || cl.indexOf('back-btn') > -1 || cl.indexOf('toc') > -1) continue;
+      if (n.classList && n.classList.contains('h2')) {
+        if (cur.text) out.push(cur);
+        cur = { chap: chap, grp: grp, id: n.id || sec.id, head: n.textContent.trim(), text: '' };
+      } else {
+        var t = srText(n);
+        if (t) cur.text += (cur.text ? ' ' : '') + t;
+      }
+    }
+    if (cur.text) out.push(cur);
+  }
+  for (var k = 0; k < out.length; k++) {
+    out[k].lc = (out[k].chap + ' ' + out[k].head + ' ' + out[k].text).toLowerCase();
+  }
+  return out;
+}
+function srSnip(text, terms){
+  var lc = text.toLowerCase(), pos = -1;
+  for (var i = 0; i < terms.length; i++) {
+    var p = lc.indexOf(terms[i]);
+    if (p > -1 && (pos === -1 || p < pos)) pos = p;
+  }
+  if (pos === -1) pos = 0;
+  var start = Math.max(0, pos - 70), end = Math.min(text.length, pos + 170);
+  var frag = (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+  var sorted = terms.slice().sort(function(a,b){ return b.length - a.length; });
+  for (var j = 0; j < sorted.length; j++) {
+    var re = new RegExp('(' + sorted[j].replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+    frag = frag.replace(re, '@@MK@@$1@@KM@@');
+  }
+  return srEsc(frag).split('@@MK@@').join('<mark>').split('@@KM@@').join('</mark>');
+}
+function doSearch(v){
+  var home = document.getElementById('home'), box = document.getElementById('sr');
+  if (!home || !box) return;
+  var q = (v || '').trim().toLowerCase();
+  if (q.length < 2) { home.classList.remove('searching'); box.innerHTML = ''; return; }
+  if (!SR_IDX) SR_IDX = srBuild();
+  var terms = q.split(/\s+/).filter(function(t){ return t.length > 0; });
+  var hits = [];
+  for (var i = 0; i < SR_IDX.length; i++) {
+    var e = SR_IDX[i], ok = true, score = 0;
+    for (var t = 0; t < terms.length; t++) {
+      if (e.lc.indexOf(terms[t]) === -1) { ok = false; break; }
+    }
+    if (!ok) continue;
+    if (e.chap.toLowerCase().indexOf(q) > -1) score += 40;
+    if (e.head.toLowerCase().indexOf(q) > -1) score += 25;
+    if (e.lc.indexOf(q) > -1) score += 10;
+    for (var t2 = 0; t2 < terms.length; t2++) { score += e.lc.split(terms[t2]).length - 1; }
+    hits.push({ e: e, s: score });
+  }
+  hits.sort(function(a,b){ return b.s - a.s; });
+  home.classList.add('searching');
+  if (!hits.length) {
+    box.innerHTML = '<div class="sr-none">No results for “' + srEsc(v) + '”. Try a drug name, a score or a symptom.</div>';
+    return;
+  }
+  var lim = Math.min(hits.length, 30);
+  var html = '<div class="sr-hd">' + hits.length + ' result' + (hits.length === 1 ? '' : 's') + '</div>';
+  for (var r = 0; r < lim; r++) {
+    var e2 = hits[r].e;
+    var title = e2.head
+      ? srEsc(e2.chap) + ' <span style="color:var(--text3);font-weight:400">›</span> ' + srEsc(e2.head)
+      : srEsc(e2.chap);
+    html += '<a class="sr-i" href="#' + e2.id + '">'
+          + '<div class="sr-c">' + srEsc(e2.grp) + '</div>'
+          + '<div class="sr-t">' + title + '</div>'
+          + '<div class="sr-s">' + srSnip(e2.text, terms) + '</div></a>';
+  }
+  if (hits.length > lim) html += '<div class="sr-none">' + (hits.length - lim) + ' more — refine the search to narrow it down.</div>';
+  box.innerHTML = html;
 }
 </script>
 </body>
